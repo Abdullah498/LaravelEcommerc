@@ -140,6 +140,7 @@ class authController extends Controller
             
         }
     }
+    //logout destroy token
     public function logout()
     {
         auth('api')->logout();
