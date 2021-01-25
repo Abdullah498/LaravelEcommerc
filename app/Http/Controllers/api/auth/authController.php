@@ -9,6 +9,8 @@ use App\Traits\generalTrait;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
 class authController extends Controller
 {
     use generalTrait;
@@ -96,6 +98,7 @@ class authController extends Controller
         $updatedUser->save();
 
         //sending mail
+        Mail::to($email)->send(new SendMail($code));
 
         $updatedUser->token = $request->header('authorization');
         return $this->returnData('user',$updatedUser);
