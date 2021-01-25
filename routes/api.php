@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix'=>'admin'],function(){
+Route::group(['prefix'=>'admin' , 'middleware'=>'ChangeLang'],function(){
     Route::group(['prefix'=>'product' , 'namespace'=>'product' , 'middleware'=>'CheckToken'],function(){
         Route::get('all-products','productController@index');
         Route::post('add-product','productController@store');

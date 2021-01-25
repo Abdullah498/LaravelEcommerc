@@ -14,7 +14,8 @@ class productController extends Controller
 
     public function index()
     {
-        $products = Product::paginate(2);
+        $lang = $this->getCurrentLang();
+        $products = Product::select('id' , 'name_'.$lang.' AS name' , 'detail_'.$lang.' AS detail' , 'price' , 'photo')->paginate(2);
         return $this->returnData('products' , $products);
     } 
     public function store(Request $request)
