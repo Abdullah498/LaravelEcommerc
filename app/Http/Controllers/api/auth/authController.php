@@ -133,14 +133,13 @@ class authController extends Controller
                 $user->token = $request->header('authorization');
                 return $this->returnData('user',$user);
             }
-        }catch(QueryException $e){
+        }catch(QueryException $e){ //identify error to send suitable error response
             $message = $e->getMessage();
             if(strpos($message , 'users_phone_unique') !== false){
                 return $this->returnError(403 , "Phone is already exist");
             }else{
                 return $this->returnError(403 , "Mail is already exist");
             }
-            
         }
     }
     //logout destroy token
